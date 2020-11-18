@@ -1,0 +1,20 @@
+*/Valida strings */
+
+function CodelandUsernameValidation(str) { 
+
+  var primeiraLetra = str.split("")[0];
+  var letraouNao = (/[a-zA-Z]/).test(primeiraLetra);
+  var limCaract = (str.length >= 4 && str.length <= 25);
+  var alfaNum = !(/[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/).test(str);
+  var semUnderlineFim = (str[str.length -1 ].localeCompare("_") != 0)
+
+
+  if(letraouNao && limCaract && alfaNum && semUnderlineFim ) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+   
+console.log(CodelandUsernameValidation(readline()));
