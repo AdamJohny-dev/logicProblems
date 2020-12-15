@@ -1,0 +1,103 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+    
+    
+    Map<String, Integer> pessoaENumero = new HashMap<String, Integer>();
+    List<String> pessoasNaBrincadeira = new ArrayList<>();
+    List<Integer> numeroAnterior = new ArrayList<>();
+    List<Integer> numeroProximo = new ArrayList<>();
+    
+   
+    
+    int quant, quantClientes = 0, primeiro = 0;
+    int teste = 2;
+    
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer numero = new StringTokenizer(br.readLine()); // Lê a linha de entrada
+        
+        quant = Integer.parseInt(numero.nextToken());
+        
+        while(quant != 0) {
+          
+      
+          for(int i = 0; i < quant; i++) {
+            StringTokenizer pessoas = new StringTokenizer(br.readLine());
+            
+            numeroAnterior.add( ((i - 1) % quant + quant) % quant);
+            numeroProximo.add((i + 1) % quant);
+            
+            while(pessoas.hasMoreTokens()) {
+             String pessoa = pessoas.nextToken();
+             int numerodaPessoa = Integer.parseInt(pessoas.nextToken());
+             
+             pessoaENumero.put(pessoa, numerodaPessoa);
+             pessoasNaBrincadeira.add(pessoa);
+            }
+          
+          }
+    
+          int i = 0;
+          
+          while(quant > 1) {
+             int value = pessoaENumero.get(pessoasNaBrincadeira.get(i));
+             
+             if(value % 2 != 0) {
+               
+               for(int j = 0; j < value; j++)
+                  i = numeroProximo.get(i);
+             } else {
+               
+               for(int j = 0; j < value; j++)
+                  i = numeroAnterior.get(i);
+             }
+             
+             
+             numeroProximo.set(numeroAnterior.get(i), numeroProximo.get(i));
+             numeroAnterior.set(numeroProximo.get(i), numeroAnterior.get(i));
+             
+             quant--;
+
+          }
+          
+          i = numeroProximo.get(i);
+          
+          
+          quantClientes++;
+          
+          
+          
+            System.out.println("Vencedor(a): "+pessoasNaBrincadeira.get(i));
+          
+          pessoaENumero.clear();
+          pessoasNaBrincadeira.clear();
+          numeroAnterior.clear();
+          numeroProximo.clear();
+        
+          numero = new StringTokenizer(br.readLine()); // Lê a linha de entrada
+        
+          quant = Integer.parseInt(numero.nextToken());
+          
+          
+        } 
+        
+        
+       
+        
+    
+   
+     
+     
+    }
+    
+    
+    
+  
+     
+}
