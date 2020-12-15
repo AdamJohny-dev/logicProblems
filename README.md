@@ -1,1 +1,1 @@
-# Repositório com soluções de problemas em JS.
+# Repositório com soluções de problemas em Java e Javascript.
